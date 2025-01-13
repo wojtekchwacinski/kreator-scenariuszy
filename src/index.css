@@ -11,3 +11,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* Styl dla kontenera Droppable */
+.droppable-container {
+  width: 300px;
+  min-height: 200px;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+/* Styl dla Draggable */
+.draggable-item {
+  padding: 10px;
+  margin: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
