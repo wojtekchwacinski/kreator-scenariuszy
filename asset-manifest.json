@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/kreator-scenariuszy/static/css/main.9c95da8e.css",
-    "main.js": "/kreator-scenariuszy/static/js/main.6dc1a873.js",
+    "main.css": "/kreator-scenariuszy/static/css/main.efa1ccaf.css",
+    "main.js": "/kreator-scenariuszy/static/js/main.4f284a07.js",
     "index.html": "/kreator-scenariuszy/index.html",
-    "main.9c95da8e.css.map": "/kreator-scenariuszy/static/css/main.9c95da8e.css.map",
-    "main.6dc1a873.js.map": "/kreator-scenariuszy/static/js/main.6dc1a873.js.map"
+    "main.efa1ccaf.css.map": "/kreator-scenariuszy/static/css/main.efa1ccaf.css.map",
+    "main.4f284a07.js.map": "/kreator-scenariuszy/static/js/main.4f284a07.js.map"
   },
   "entrypoints": [
-    "static/css/main.9c95da8e.css",
-    "static/js/main.6dc1a873.js"
+    "static/css/main.efa1ccaf.css",
+    "static/js/main.4f284a07.js"
   ]
 }
