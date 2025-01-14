@@ -79,8 +79,20 @@ const Window = ({ show, onClose, item, onSave, onDelete }) => {
         { name: "PO904", latitude: "52°45'04,3''N", longitude: "016°53'57,4''E" },
     
     ];
-    const weatherOptions = ["Sunny", "Cloudy", "Rainy", "Stormy", "Snowy"];
-    const eventOptions = ["Fire", "Engine kaput", "pilot kaput", "plane kaput", "Emergency"];
+    const weatherOptions = ["Sky clear", "Few clouds", "Very cloudy", "Rain", "Heavy rain", "Snow", "Thunderstorm", "Strong winds"];
+    const eventOptions = [
+        "No emergency",
+        "Fire in engine",              
+        "Engine failure",              
+        "Cabin depressurization",      
+        "Pilot incapacitation",        
+        "Medical emergency",           
+        "Landing gear failure",        
+        "Severe turbulence",           
+        "Fuel leak",                   
+        "Navigation system failure",   
+        "Smoke in cockpit"             
+      ];
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -180,16 +192,16 @@ const Window = ({ show, onClose, item, onSave, onDelete }) => {
             >
                 {/* Kolumna lewa */}
                 <div className="form-column" style={{ flex: 1 }}>
-                    <h2>Current Time</h2>
+                    <label>Current Time</label>
                     <input
-                        type="number"
+                        type="time"
                         step="any"
                         name="time"
                         value={editableItem.time}
                         onChange={handleChange}
                     />
 
-                    <h2>Current Fuel Level</h2>
+                    <label>Current Fuel Level</label>
                     <input
                         type="number"
                         step="any"
@@ -198,16 +210,7 @@ const Window = ({ show, onClose, item, onSave, onDelete }) => {
                         onChange={handleChange}
                     />
 
-                    <h2>Current Speed</h2>
-                    <input
-                        type="number"
-                        step="any"
-                        name="value"
-                        value={editableItem.velocity.value}
-                        onChange={handleVelocityChange}
-                    />
-
-                    <h2>Squawk</h2>
+                    <label>Squawk</label>
                     <input
                         type="text"
                         name="squawk"
@@ -215,7 +218,7 @@ const Window = ({ show, onClose, item, onSave, onDelete }) => {
                         onChange={handleChange}
                     />
 
-                    <h2>Weather</h2>
+                    <label>Weather</label>
                     <select
                         name="weather"
                         value={editableItem.weather}
@@ -231,12 +234,31 @@ const Window = ({ show, onClose, item, onSave, onDelete }) => {
                             </option>
                         ))}
                     </select>
+                    <h2>Velocity</h2>
+                    <label>Value</label>
+                    <input
+                        type="number"
+                        step="any"
+                        name="value"
+                        value={editableItem.velocity.value}
+                        onChange={handleVelocityChange}
+                    />
+                    <label>Direction</label>
+                    <input
+                        type="number"
+                        step="any"
+                        name="direction"
+                        value={editableItem.velocity.direction}
+                        onChange={handleVelocityChange}
+                    />
+
                 </div>
 
                 {/* Kolumna prawa */}
                 <div className="form-column" style={{ flex: 1 }}>
                     {/* Latitude and Longitude as a dropdown */}
-                    <h2>Latitude and Longitude</h2>
+                    <h2>Position</h2>
+                    <label>Latitude and Longitude</label>
                     <select
                         value={selectedPoint} // Ustawienie wybranego punktu
                         onChange={handlePointChange}
@@ -252,7 +274,7 @@ const Window = ({ show, onClose, item, onSave, onDelete }) => {
                         ))}
                     </select>
 
-                    <h2>Altitude</h2>
+                    <label>Altitude</label>
                     <input
                         type="number"
                         step="any"
@@ -260,16 +282,7 @@ const Window = ({ show, onClose, item, onSave, onDelete }) => {
                         value={editableItem.position.altitude}
                         onChange={handleCoordinateChange}
                     />
-
-                    <h2>Velocity Direction</h2>
-                    <input
-                        type="number"
-                        step="any"
-                        name="direction"
-                        value={editableItem.velocity.direction}
-                        onChange={handleVelocityChange}
-                    />
-                    <h2>Events</h2>
+                    <label>Events</label>
                     <select
                         name="Events"
                         value={editableItem.Events}

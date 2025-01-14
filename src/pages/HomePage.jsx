@@ -198,7 +198,7 @@ const Homepage = () => {
     };
 
     return (
-        <div>
+        <div >
             <button onClick={addColumn} className="add-column-btn">
                 Add Events Column
             </button>

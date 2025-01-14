@@ -4,6 +4,18 @@ import Modal from "react-modal";
 Modal.setAppElement("#root");
 
 const EditModal = ({ status, onClose, onSave }) => {
+    const predefinedAirports = [
+        "Warsaw Chopin Airport (WAW)",        // Lotnisko Chopina w Warszawie
+        "Kraków John Paul II Airport (KRK)", // Lotnisko w Krakowie-Balicach
+        "Gdańsk Lech Wałęsa Airport (GDN)",  // Lotnisko w Gdańsku
+        "Katowice Airport (KTW)",            // Lotnisko w Katowicach-Pyrzowicach
+        "Wrocław Copernicus Airport (WRO)",  // Lotnisko we Wrocławiu
+        "Poznań-Ławica Airport (POZ)",       // Lotnisko w Poznaniu
+        "Modlin Airport (WMI)",              // Lotnisko w Modlinie
+        "Rzeszów-Jasionka Airport (RZE)",    // Lotnisko w Rzeszowie
+        "Łódź Władysław Reymont Airport (LCJ)", // Lotnisko w Łodzi
+        "Szczecin-Goleniów Airport (SZZ)"    // Lotnisko w Szczecinie
+    ];
     const predefinedPoints = [
         { name: "IAF PO481", latitude: "52°18'08,9''N", longitude: "017°17'03,8''E" },
         { name: "IF PO482", latitude: "52°20'08,1''N", longitude: "017°09'35,3''E" },
@@ -75,8 +87,8 @@ const EditModal = ({ status, onClose, onSave }) => {
     ];
     const [editableStatus, setEditableStatus] = useState({
         ...status,
-        velocity: status.velocity || { direction: 0, value: 0 }, // Zapewnienie domyślnych wartości
-        position: status.position || { latitude: 0, longitude: 0, altitude: 0 }, // Zapewnienie domyślnych wartości
+        velocity: status.velocity || { direction: 0, value: 0 }, 
+        position: status.position || { latitude: 0, longitude: 0, altitude: 0 }, 
     });
 
     const handleChange = (e) => {
@@ -197,23 +209,27 @@ const EditModal = ({ status, onClose, onSave }) => {
                         />
 
                         <label>Destination:</label>
-                        <input
-                            type="text"
-                            name="destination"
-                            value={editableStatus.destination}
-                            onChange={handleChange}
-                        />
+                        <select name="destination" value={editableStatus.destination} onChange={handleChange} style={{ padding: "10px", width: "100%" }}>
+                            <option value="" disabled>Select a destination airport</option>
+                            {predefinedAirports.map((airport) => (
+                                <option key={airport} value={airport}>
+                                    {airport}
+                                </option>
+                            ))}
+                        </select>
                     </div>
 
                     {/* Kolumna 2 */}
                     <div>
-                        <label>Alternative Airports:</label>
-                        <input
-                            type="text"
-                            name="alternative_airports"
-                            value={editableStatus.alternative_airports}
-                            onChange={handleChange}
-                        />
+                    <label>Alternative Airports:</label>
+                        <select name="alternative_airports" value={editableStatus.alternative_airports} onChange={handleChange} style={{ padding: "10px", width: "100%" }}>
+                            <option value="" disabled>Select an alternative airport</option>
+                            {predefinedAirports.map((airport) => (
+                                <option key={airport} value={airport}>
+                                    {airport}
+                                </option>
+                            ))}
+                        </select>
 
                         <label>Squawk:</label>
                         <input
@@ -242,7 +258,7 @@ const EditModal = ({ status, onClose, onSave }) => {
                             type="number"
                             step="any"
                             name="velocity.direction"
-                            value={editableStatus.velocity?.direction || ""}
+                            value={editableStatus.velocity?.direction }
                             onChange={handleChange}
                         />
                         <label>Value:</label>
@@ -250,7 +266,7 @@ const EditModal = ({ status, onClose, onSave }) => {
                             type="number"
                             step="any"
                             name="velocity.value"
-                            value={editableStatus.velocity?.value || ""}
+                            value={editableStatus.velocity?.value}
                             onChange={handleChange}
                         />
 
@@ -276,7 +292,7 @@ const EditModal = ({ status, onClose, onSave }) => {
                             type="number"
                             step="any"
                             name="position.altitude"
-                            value={editableStatus.position?.altitude || ""}
+                            value={editableStatus.position?.altitude }
                             onChange={handleChange}
                         />
                     </div>
