@@ -210,14 +210,6 @@ const Window = ({ show, onClose, item, onSave, onDelete }) => {
                         onChange={handleChange}
                     />
 
-                    <label>Squawk</label>
-                    <input
-                        type="text"
-                        name="squawk"
-                        value={editableItem.squawk}
-                        onChange={handleChange}
-                    />
-
                     <label>Weather</label>
                     <select
                         name="weather"

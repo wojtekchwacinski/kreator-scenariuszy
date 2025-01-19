@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Item from "../components/Item";
 import DropWrapper from "../components/DropWrapper";
 import Col from "../components/Col";
@@ -29,12 +29,23 @@ const Homepage = () => {
                 longitude: 0.0,
                 altitude: 0.0
             },
-            sim_id: 1111
+            sim_id: false
 
 
 
         } }
     ]);
+    const [disableSimIdFields, setDisableSimIdFields] = useState(true); // Track if any column has sim_id = true
+
+    // Call checkSimIdInColumns whenever statuses change
+    useEffect(() => {
+        const checkSimIdInColumns = () => {
+            const hasSimId = statuses.some(status => status.status.sim_id === true);
+            setDisableSimIdFields(hasSimId); // Disable sim_id field if any column has sim_id = true
+        };
+    
+        checkSimIdInColumns();
+    }, [statuses]);
 
     const onDrop = (item, monitor, status) => {
         setItems(prevState => {
@@ -121,7 +132,7 @@ const Homepage = () => {
                 longitude: 0.0,
                 altitude: 0.0
             },
-            sim_id: 1111
+            sim_id: false
 
 
 
@@ -159,7 +170,18 @@ const Homepage = () => {
             },
         ]);
     };
-    
+    const getSimIdEditable = () => {
+        return statuses.some(status => status.status.sim_id === true);
+    };
+    const handleSimIdChange = (statusId, newSimId) => {
+        setStatuses(prevStatuses =>
+            prevStatuses.map(status =>
+                status.status.id === statusId
+                    ? { status: { ...status.status, sim_id: newSimId } }
+                    : { status: { ...status.status, sim_id: false } }
+            )
+        );
+    };
     const downloadData = () => {
         const dataToDownload = statuses.map(status => {
             const itemsInStatus = items.filter(item => item.statusId === status.status.id).map(({status, ...rest}) => rest);
@@ -185,7 +207,7 @@ const Homepage = () => {
                     longitude: status?.status?.position?.longitude || 0.0, // Długość geograficzna
                     altitude: status?.status?.position?.altitude || 0.0, // Wysokość
                 },
-                sim_id: status?.status?.sim_id || '', // Identyfikator symulacji
+                sim_id: status?.status?.sim_id || false, // Identyfikator symulacji
                 items: itemsInStatus, // Przypisane elementy
             };
         });
@@ -221,6 +243,8 @@ const Homepage = () => {
                                     )
                                 );
                             }}
+                            disableSimIdField={!getSimIdEditable() || s.status.sim_id === false} 
+                            handleSimIdChange={handleSimIdChange}
                         >
                         {items
                             .filter((i) => {

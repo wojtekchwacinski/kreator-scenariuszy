@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 
 import EditModal from "./Modal";
-const Col = ({ isOver, children, addNewItem, removeColumn, status, saveStatus }) => {
+const Col = ({ isOver, children, addNewItem, removeColumn, status, saveStatus, disableSimIdField,  handleSimIdChange}) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleOpenModal = () => {
@@ -39,6 +39,8 @@ const Col = ({ isOver, children, addNewItem, removeColumn, status, saveStatus })
                     status={status}
                     onClose={handleCloseModal}
                     onSave={handleSave}
+                    disableSimIdField={disableSimIdField}  
+                    handleSimIdChange={handleSimIdChange}
                 />
             )}
         </div>

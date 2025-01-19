@@ -3,7 +3,7 @@ import Modal from "react-modal";
 
 Modal.setAppElement("#root");
 
-const EditModal = ({ status, onClose, onSave }) => {
+const EditModal = ({ status, onClose, onSave, disableSimIdField,  handleSimIdChange}) => {
     const predefinedAirports = [
         "Warsaw Chopin Airport (WAW)",        // Lotnisko Chopina w Warszawie
         "Kraków John Paul II Airport (KRK)", // Lotnisko w Krakowie-Balicach
@@ -114,6 +114,14 @@ const EditModal = ({ status, onClose, onSave }) => {
             }));
         }
     };
+    const handleSimIdChangeLocal = (e) => {
+        const newSimId = e.target.checked;
+        setEditableStatus((prevStatus) => ({
+            ...prevStatus,
+            sim_id: newSimId,
+        }));
+        handleSimIdChange(status.id, newSimId); // Wywołanie zmiany sim_id w innych kolumnach
+    };
     const [selectedPoint, setSelectedPoint] = useState(() => {
         // Sprawdzamy, czy współrzędne pasują do któregoś punktu na liście
         const match = predefinedPoints.find(
@@ -217,6 +225,22 @@ const EditModal = ({ status, onClose, onSave }) => {
                                 </option>
                             ))}
                         </select>
+
+                        <label>Plane Model</label>
+                        <input 
+                            type="text"
+                            name="type_of_aircraft"
+                            value={editableStatus.type_of_aircraft}
+                            onChange={handleChange}
+                            />
+                        <label>Plane Sim:</label>
+                        <input
+                            type="checkbox"
+                            name="sim_id"
+                            checked={editableStatus.sim_id}
+                            onChange={handleSimIdChangeLocal}
+                        />
+
                     </div>
 
                     {/* Kolumna 2 */}
